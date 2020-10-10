@@ -1,0 +1,190 @@
+1.Design your own diagram to represent storage layout.
+2,Discuss in short how a compiler manages its storage.
+• Static Allocation
+- Lays out storage of all data objects at compile
+time
+• Stack Allocation
+- Manages the run-time storage as a
+stack
+• Heap Allocation
+- Allocates & deallocates storage as needed at run-time from a
+data area known as a heap.
+3,Do you think type checker should continues parsing the input without recovering from error? Why?
+ 
+ No it should not beacuase if it is parsing withoun recovering from parsing the parsed inpun will result a fualty output
+
+
+4,For what purpose will the compiler uses static, heap and stack memory?
+---uses static memory when---
+(as the memory requirement and storage locations are known in advance, run time support package for memory allocation and de allocation is not required)
+---uses heap memory when
+( is used to allocate memory to hte variaible and claim it back when the variables are no more required)
+---uses stack memory when
+( used in for recursive procedure calls since it works in LIFO method.
+
+
+5.Give 3 examples of type expressions which are structurally equivalent.
+
+6.Give 5 examples three-address statement and their translated code sequence.
+
+
+7.How could a compiler manages address of array elements? Give an illustrative example.
+If the width of each array element is w, the
+relative address of the array is base and the
+lower bound of the index is low, then the i th
+element of the array is found at the address:
+base + (i – low) * w
+
+Example: for an array declared as A : array
+[5..10] of integer; if it is stored at the address
+100, then
+A[7] = 100 + (7 – 5) * 4
+
+8.How could name binding is performed? Discuss in detail.
+an environment maps a name to an l-value, and a state maps the l-value to an r-value.
+• Environment and States are different; an assignment changes the state, but not the environment.
+• When an environment associates storage location s with a name x, we say that x is bound to s; the
+association itself is referred to as binding of x.
+
+
+9,State at least 3 similarities and differences between procedure and functions?
+differnces 
+1,A function is used to calculate result using given inputs. but A procedure is used to perform certain task in order.
+2,A function can be called by a procedure. but 	A procedure cannot be called by a function.
+3,A function has no support for try-catch but A procedure has support for try-catch blocks.
+
+similaraties
+
+
+
+10.What are advantages of using pass by reference parameter passing method? Give some examples to show those advantages.
+
+When the function is called, ref will become a reference to the argument. Since a reference to a variable is treated exactly the same as the variable itself, any changes made to the reference are passed through to the argument!
+
+	
+void addOne(int &ref)
+{
+    ref = ref + 1;
+}
+ 
+int main()
+{
+    int value = 5;
+ 
+    cout << "value = " << value << '\n';
+    addOne(value);
+    cout << "value = " << value << '\n';
+    return 0;
+}
+
+
+Sometimes we need a function to return multiple values. However, functions can only have one return value. One way to return multiple values is using reference parameters:
+	
+#include <iostream>
+#include <cmath>    // for std::sin() and std::cos()
+ 
+void getSinCos(double degrees, double &sinOut, double &cosOut)
+{
+    // sin() and cos() take radians, not degrees, so we need to convert
+    static constexpr double pi { 3.14159265358979323846 }; // the value of pi
+    double radians = degrees * pi / 180.0;
+    sinOut = std::sin(radians);
+    cosOut = std::cos(radians);
+}
+ 
+int main()
+{
+    double sin(0.0);
+    double cos(0.0);
+ 
+    // getSinCos will return the sin and cos in variables sin and cos
+    getSinCos(30.0, sin, cos);
+ 
+    std::cout << "The sin is " << sin << '\n';
+    std::cout << "The cos is " << cos << '\n';
+    return 0;
+}
+
+
+11.What are classifications in type checking process? Please define them in detail.
+staic and dynamic type checking
+1, A language is statically-typed if the type of a variable is known at compile time instead of at runtime. Common examples of statically-typed languages include Ada, C, C++, C#, JADE, Java, Fortran, Haskell, ML, Pascal, and Scala.
+2,Dynamic type checking is the process of verifying the type safety of a program at runtime. Common dynamically-typed languages include Groovy, JavaScript, Lisp, Lua, Objective-C, PHP, Prolog, Python, Ruby, Smalltalk and Tcl.
+
+
+12.What are elements of activation tree? What is the use of them?
+1. Each node represents an activation of a procedure.
+2. The root represents the activation of the main program.
+3. The node for a is the parent of the node for b if and only if
+control flows from activation a to b.
+4. The node for a is to the left of the node for b if and only if
+the lifetime of a occurs before the lifetime of b.
+
+
+
+
+
+13.What are major activities performed in type checking process?
+    It determines the types of all variables and expressions in the program.
+    Resolves method calls and field accesses (and local and global variables etc). This is required to determine the type of the actual method call or field access expressions. Throw errors if something isn’t found, as well as assigning a “NULL” type that will always match further compatibility checks (we want to see more useful error messages)
+    Checks for compatibility in each operator or function call. You cannot pass an Object where an Integer is expected, for example. Throw errors if there is an incompatibility, but in order to search for further incompatibilities the compiler might still assign some type to that expression.
+    If generics exist in the language, resolve all instantiations (in case of reified generics) or check using the typical rules (with special rules for generics). The above checks are still the same for generics as well, just the specific rules are varied.
+
+
+
+
+14.What are major advantages of code optimization?
+ Executes faster
+ Efficient memory usage
+ Yielding better performance.
+
+
+
+
+15.What are types of three-address code? Give an example for each type.
+Quadruples
+Triples
+Indirect triples
+Single-Static-Assignment(SSA)
+
+
+16.What is postfix notation? Give 5 complex examples  of post fix notation regards with their regular format.
+The postfix notation is practical for an intermediate representation as the operands are found just before
+the operator.
+
+example
+a,A + B * C + D   to A B C * + D +
+b,(A + B) * (C + D) to A B + C D + *
+c,A * B + C * D to A B * C D * +
+d,A + B + C + D to A B + C + D +
+e,(A + B) * C to A B + C *
+
+
+17. What is the difference between abstract tree and parse tree? Which one is more condensed? Why?
+An AST describes the source code conceptually, but in the case of A Parse tree it represents the source code more closely.
+
+The abstract tree is more condensed beacause it doesn't need to contain all the syntactical elements required to parse some source code curly braces, keywords, parenthesis, etc 
+
+
+18. What is the difference between implicit declaration and explicit declaration? What are
+their advantages and disadvantages?
+explicit declaration sets the type of a variable or object to a specific type. it is very useful for debugging and perforamance at the compile time but if one forget or give wrong declation type this will result to logical error
+
+
+implicit declaration sets the type of a variable or object to a reasonable default or
+easily inferred type, according to some pre-built rules.
+
+if one forget to declare or doesnt what or hot to declare then it can be usefull but unlike the explicit declaration it won't help us in the case of debugging and performance will be less. 
+
+
+19. Why is Dangling problem happened? Give some examples which have dangling problems.
+mostly it happend in the case of forgeting or misuse of if else statment.for example when we use a nested if
+if(condition)
+code;
+if(condition)
+code;
+else
+code;
+ in this case we wanted the else statment to execute if the first if condition is not met.
+20. Why is intermediate code generation is neither part of front end nor part of back end?
+becuase it is in the middle of the two end which help us to transform or change the front end source code to the back end. it is like a bridge for the two of them.
